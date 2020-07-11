@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">ToDo list</h1>
+    <p class="lead">お前みたいなやつがtodoリスト作ってもしょうがないよ</p>
+  </div>
+</div>
+{% endblock %}
+{% block content%}
+<div class="container">
+  <p><a class="btn btn-primary" href="{% url 'create'  %}" role="button">新規作成</a></p>
+    {% for item in object_list %}
+        <div class="alert alert-{{ item.priority }}" role="alert">
+            <p>{{ item.title }}　　　{{ item.duedate }} までにやるんだろ</p>
+           <a class="btn btn-primary" href="{% url 'update' item.pk %}" role="button">編集</a>
+           <a class="btn btn-success" href="{% url 'detail' item.pk%}" role="button">詳細</a>
+           <a class="btn btn-danger" href="{% url 'delete' item.pk%}" role="button">削除</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
